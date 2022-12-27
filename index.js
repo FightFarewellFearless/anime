@@ -32,11 +32,6 @@ webpush.setVapidDetails('mailto:' + process.env.mail, process.env.publicKey, pro
 // const cookieParser = require("cookie-parser");
 require('dotenv').config();
 
-console.log('Cleaning up...');
-fs.readdirSync('./downloaded').forEach(z => {
-    fs.unlinkSync('./downloaded/' + z)
-})
-
 console.log('Setting up...');
 // setup
 
