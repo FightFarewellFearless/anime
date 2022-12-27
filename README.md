@@ -49,7 +49,7 @@ simpan key tersebut untuk nanti kita akan taruh di dalam environment.
 ### Environment
 
 Setelah semua proses di atas, sekarang saatnya pembuatan environment.  
-untuk membuat environment cara simple nya kamu bisa buat file dengan nama ".env" atau jika kamu berada di hosting public seperti replit dan glitch, mereke biasanya mempunyai environment mereka sendiri kamu dapat memeriksanya, jika ada, maka kamu tidak perlu membuat file .env  
+untuk membuat environment cara simple nya kamu bisa buat file dengan nama ".env" atau jika kamu berada di hosting public seperti replit dan glitch, mereka biasanya mempunyai environment mereka sendiri kamu dapat memeriksanya, jika ada, maka kamu tidak perlu membuat file .env  
   
 Ok, selanjutnya kamu dapat copy text di bawah ini:  
 ```
@@ -69,6 +69,10 @@ Semua sudah ter-setup dengan baik. Sekarang saatnya menjalankan server kamu. Gun
 node index.js
 ```  
 Jika sudah ada pesan "listening to (port)" di console maka kamu bisa ke http://localhost:port  
+
+# Demo
+
+Kamu dapat melihat situs aslinya di [anime.pirles.ga](https://anime.pirles.ga)
 
 # Contribute
 
