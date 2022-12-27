@@ -157,9 +157,7 @@ newAnime().then(async (animeData) => {
         if (req.session.isAdmin) {
             res.render(__dirname + '/views/admin.ejs', {
                 isMaintenance: (await db.get('isMaintenance')).value,
-                deniedDownload: (await db.get('deniedDownload')).value,
-                downloadDirSize: await downloadDirSize(),
-                downloadFileLength: (await fs.promises.readdir('./downloaded/')).length
+                deniedDownload: (await db.get('deniedDownload')).value
             });
         }
         else {
@@ -457,13 +455,3 @@ newAnime().then(async (animeData) => {
         })
     }, 40000)
 })
-
-async function downloadDirSize() {
-    const fileInDir = await fs.promises.readdir('./downloaded/');
-    let size = 0;
-    for (const file of fileInDir) {
-        const thisFileSize = (await fs.promises.stat('./downloaded/' + file)).size;
-        size += thisFileSize;
-    }
-    return size / (1024 * 1024); //return the size in megabytes
-}

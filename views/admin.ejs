@@ -106,20 +106,6 @@
         <br>
         <br>
         <div class="w3-green w3-block" style="height: 2px;"></div>
-        <h3>Denny download:</h3>
-        <label class="switch">
-            <input id="dennyDownload" type="checkbox">
-            <span class="slider round"></span>
-        </label>
-        <br>
-        <br>
-        <div class="w3-green w3-block" style="height: 2px;"></div>
-        <h3>Download Statistics</h3>
-        Download dir size: <%= downloadDirSize %> MB<br>
-        Download file length: <%= downloadFileLength %> 
-        <br>
-        <br>
-        <div class="w3-green w3-block" style="height: 2px;"></div>
         <h3>System uptime:</h3>
         <%= new Date(process.uptime() * 1000).toISOString().slice(11, 19) %> 
         <br>
@@ -134,13 +120,6 @@
         if (isMaintenance) maintenanceCheck.checked = true;
         maintenanceCheck.onchange = async () => {
             await axios.post('/admin/setmaintenance', { m: maintenanceCheck.checked }, { withCredentials: true })
-        }
-
-        const isDownloadDenied = '<%= deniedDownload %>' == 'true';
-        const dennyDownload = document.getElementById('dennyDownload');
-        if (isDownloadDenied) dennyDownload.checked = true;
-        dennyDownload.onchange = async () => {
-            await axios.post('/admin/setdennydownload', { m: dennyDownload.checked }, { withCredentials: true })
         }
 
         async function sendnotif() {
