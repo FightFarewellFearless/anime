@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch anime</title>
+</head>
+<style>
+    body {
+        background-color: rgb(26, 26, 26);
+        color: rgb(218, 218, 218);
+    }
+
+    #player {
+        width: 55%;
+        height: calc(50vw * 0.7);
+    }
+
+    .loader {
+        --b: 10px;
+        /* border thickness */
+        --n: 10;
+        /* number of dashes*/
+        --g: 10deg;
+        /* gap between dashes*/
+        --c: red;
+        /* the color */
+
+        width: 100px;
+        /* size */
+        aspect-ratio: 1;
+        border-radius: 50%;
+        padding: 1px;
+        background: conic-gradient(#0000, var(--c)) content-box;
+        -webkit-mask:
+            repeating-conic-gradient(#0000 0deg,
+                #000 1deg calc(360deg/var(--n) - var(--g) - 1deg),
+                #0000 calc(360deg/var(--n) - var(--g)) calc(360deg/var(--n))),
+            radial-gradient(farthest-side, #0000 calc(98% - var(--b)), #000 calc(100% - var(--b)));
+        mask:
+            repeating-conic-gradient(#0000 0deg,
+                #000 1deg calc(360deg/var(--n) - var(--g) - 1deg),
+                #0000 calc(360deg/var(--n) - var(--g)) calc(360deg/var(--n))),
+            radial-gradient(farthest-side, #0000 calc(98% - var(--b)), #000 calc(100% - var(--b)));
+        -webkit-mask-composite: destination-in;
+        mask-composite: intersect;
+        animation: load 1s infinite steps(var(--n));
+    }
+
+    @keyframes load {
+        to {
+            transform: rotate(1turn)
+        }
+    }
+</style>
+<%- include(process.cwd() + '/assets/dropdown.ejs' ) %>
+
+    <body>
+        <h2>
+            <%= title %>
+        </h2>
+        <div class="w3-center">
+            <% if(url=='' ) {%>
+                <h2>Streaming link tidak tersedia!</h2>
+                <% } else { %>
+                    <iframe id="player" sandbox="allow-scripts allow-same-origin" frameBorder="0" allowfullscreen
+                        src="<%= url %>"></iframe>
+                    <% } %>
+                        <% if(download !==undefined) {%>
+                            <div id="downbtn">
+                                <button id="dlbtn" onclick="window.open('<%= download %>')"
+                                    class="w3-button w3-red">Download</button>
+                            </div>
+                            <% } else { %>
+                                <a>Download Link tidak tersedia..</a>
+                                <% } %>
+        </div>
+    </body>
+
+    <script>
+        async function download(url, title) {
+            alert('File download kamu akan di proses, mohon menunggu dengan sabar... (silahkan tekan ok untuk melanjutkan)');
+            const btn = document.getElementById('downbtn');
+            btn.innerHTML = `<div class="loader w3-center" style="width:40px;height:40px;"></div> File kamu sedang di proses...`;
+            const dlLink = await axios.post('/getDLLink', {
+                url,
+                title
+            }).catch(() => { });
+            if (dlLink.data == 'denied') return btn.innerHTML = 'Download telah di disable oleh admin untuk sementara';;
+            if (dlLink.data == 'out of space') return btn.innerHTML = 'Penyimpanan server sudah mencapai batas! kamu tidak bisa download sekarang, silahkan coba nanti (server akan otomatis cleanup setiap 8 menit per satu file yang di download)';;
+            if (dlLink.data == 'out of queue') return btn.innerHTML = 'Antrian sudah mencapai batas (4)! silahkan coba lagi nanti';;
+            if (dlLink.data == null) return btn.innerHTML = 'Gagal memproses file! kemungkinan file tidak tersedia';;
+            btn.innerHTML = 'File sudah selesai proses, silahkan di download :)'
+            window.location = dlLink.data
+        }
+    </script>
+    <!-- <script>
+    document.getElementById('player').style.height = window.innerHeight + 'px'
+</script> -->
+
+
+    <!-- <script defer>
+        const player = document.getElementById('player');
+        if (window.matchMedia("(max-width: 767px)").matches) {
+            player.style.width = '87%';
+            player.style.height = '30vh'
+        }
+        else {
+            player.style.width = '55%';
+            player.style.height = 'calc(50vw * 0.7)'
+        }
+    </script> -->
+
+    <style>
+        @media screen and (max-width: 767px) {
+            #player {
+                width: 87%;
+                height: 30vh;
+            }
+        }
+    </style>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search free anime</title>
+</head>
+<%- include(process.cwd() + '/assets/dropdown.ejs') %>
+<style>
+    body {
+        background-color: rgb(26, 26, 26);
+        color: rgb(218, 218, 218);
+    }
+
+    /* #list {
+            overflow: auto;
+            white-space: nowrap;
+        } */
+    /* #list div {
+            display: inline-block;
+        } */
+</style>
+
+<body>
+    <h3 class="w3-center">Mohon tunggu sebentar...</h3>
+    <iframe id="iframe" src="<%= link %>" hidden></iframe> 
+</body>
+<script type="text/javascript">
+    document.getElementById('iframe').addEventListener('load', () => {
+        window.location.replace('/watch?r=<%= Buffer.from(link).toString("base64") %>')
+    })
+</script>
+</html>

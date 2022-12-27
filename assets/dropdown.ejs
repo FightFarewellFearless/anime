@@ -1,0 +1,48 @@
+<script src="/assets/menu.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1411830178855665"
+     crossorigin="anonymous"></script>
+<link rel="preload" href="https://www.w3schools.com/w3css/4/w3.css" as="style">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="w3-top ">
+    <div class="w3-bar w3-teal w3-card w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-right w3-padding-large w3-hover-white w3-large w3-red"
+            href="javascript:void(0);" onclick="toggle()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+        <a href="/" class="w3-bar-item w3-button w3-padding-large w3-white"><i class="fa fa-home fa-solid "
+                aria-hidden="true"></i> Home</a>
+    </div>
+    <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-large">
+        <a href="javascript:void(0)" onclick="cariAnime()"
+            class="w3-bar-item w3-button w3-padding-large w3-gray w3-border w3-border-black"><i
+                class="fa fa-search"></i> Cari anime</a>
+        <a href="javascript:void(0)" onclick="askNotification()"
+            class="w3-bar-item w3-button w3-padding-large w3-gray w3-border w3-border-black"><i class="fa fa-bell"></i>
+            Dapatkan notifikasi saat
+            anime terbaru rilis</a>
+        <a href="javascript:void(0)" onclick="deleteNotification()"
+            class="w3-bar-item w3-button w3-padding-large w3-gray w3-border w3-border-black"><i
+                class="fa fa-bell-slash"></i> Hapus
+            notifikasi</a>
+    </div>
+</div>
+
+<script>
+    document.body.style.padding = '40px 0px'
+
+    function toggle() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+            // document.body.style.padding = '200px 0px';
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+            // document.body.style.padding = '35px 0px';
+        }
+    }
+</script>
+
+<noscript>
+    <meta http-equiv=refresh content='0; url=/noscript'>
+</noscript>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search free anime</title>
+</head>
+<%- include(process.cwd() + '/assets/dropdown.ejs') %>
+
+<style>
+    body {
+        background-color: rgb(26, 26, 26);
+        color: rgb(218, 218, 218);
+    }
+
+    /* #list {
+            overflow: auto;
+            white-space: nowrap;
+        } */
+    /* #list div {
+            display: inline-block;
+        } */
+</style>
+<body>
+    <h2>Hasil untuk <%= query %>:</h2>
+    <div id="list">
+        <% if(search.length > 0) { %>
+            <% search.forEach((data, i)=> { %>
+                <a class="w3-display-container" style="cursor: pointer;" href="/watch?r=<%= Buffer.from(data.animeUrl).toString('base64') %>">
+                    <img class="w3-image w3-border w3-border-red w3-animate-zoom" src="<%= data.thumbnailUrl %>"
+                        style="width:180px;height:120px;" loading="lazy">
+                    <div class="w3-display-left w3-orange w3-tiny w3-animate-zoom">
+                        <%= data.title %>
+                    </div>
+                </a>
+            <% }) %>
+        <% } else { %>
+            <h4>Tidak ada hasil untuk <%= query %></h4>
+        <% } %>
+    </div>
+
+</body>
+</html>

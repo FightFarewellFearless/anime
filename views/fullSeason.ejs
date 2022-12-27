@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full anime season</title>
+</head>
+<%- include(process.cwd() + '/assets/dropdown.ejs' ) %>
+    <style>
+        body {
+            background-color: rgb(26, 26, 26);
+            color: rgb(218, 218, 218);
+        }
+
+        nav ul {
+            height: 300px;
+        }
+
+        nav ul {
+            overflow: hidden;
+            overflow-y: scroll;
+        }
+
+        /* #list {
+            overflow: auto;
+            white-space: nowrap;
+        } */
+        /* #list div {
+            display: inline-block;
+        } */
+    </style>
+
+    <body>
+        <h1>
+            <%= data.title %>
+        </h1>
+        <p>
+            <span class="w3-large">
+                Sinopsis:<br>
+            </span>
+            <%= data.synopsys %>
+        </p>
+        <div class="w3-large">Pilih episode: </div>
+        <nav class="w3-center" style="background-color: rgb(39, 37, 37);">
+            <ul>
+                <% data.episodeList.forEach(z=> { %>
+    
+                    <li class="w3-padding"><a href="/watch?r=<%= Buffer.from(z.link).toString('base64') %>">
+                            <%= z.episode %>
+                        </a></li>
+                <% }) %>
+            </ul>
+        </nav>
+    </body>
+
+</html>

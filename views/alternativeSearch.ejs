@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search free anime</title>
+</head>
+<%- include(process.cwd() + '/assets/dropdown.ejs') %>
+<style>
+    body {
+        background-color: rgb(26, 26, 26);
+        color: rgb(218, 218, 218);
+    }
+
+    /* #list {
+            overflow: auto;
+            white-space: nowrap;
+        } */
+    /* #list div {
+            display: inline-block;
+        } */
+</style>
+
+<body>
+    <h2>Pilih anime:</h2>
+    <div id="list">
+        <% search.forEach((data, i)=> { %>
+            <a class="w3-button" onclick="goto('<%= i %>')">
+                <div class="w3-orange">
+                    <%= data.title %>
+                </div>
+            </a>
+            <% }) %>
+    </div>
+    
+</body>
+
+<script>
+    function goto(i) {
+        const data = eval('<%- JSON.stringify(search) %>');
+        window.location = '/searchresulttemp?r=' + data[i].animeUrl
+    }
+</script>
+
+</html>

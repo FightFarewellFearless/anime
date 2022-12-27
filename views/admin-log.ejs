@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log</title>
+</head>
+<style>
+    body {
+        background-color: rgb(26, 26, 26);
+        color: rgb(218, 218, 218);
+    }
+
+    /* #list {
+            overflow: auto;
+            white-space: nowrap;
+        } */
+    /* #list div {
+            display: inline-block;
+        } */
+</style>
+<%- include(process.cwd() + '/assets/dropdown.ejs' ) %>
+
+    <body>
+        <button class="w3-button w3-red" onclick="resetLog()"><i class="fa fa-repeat"></i> Reset Log!</button><br />
+        <table class="w3-responsive w3-table">
+            <tr>
+                <th>Number</th>
+                <th>User Agent</th>
+                <th>Date</th>
+                <th>Path</th>
+            </tr>
+            <% JSON.parse(JSON.stringify(log)).reverse().forEach((content, index)=> { %>
+                <tr>
+                    <td>
+                        <%= index + 1 %>
+                    </td>
+                    <td>
+                        <%= content.useragent %>
+                    </td>
+                    <td class="renderTD">
+                        <%= content.date %>
+                    </td>
+                    <td>
+                        <%= content.path %>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+    </body>
+    <script>
+        function toDate(date) {
+            if (date === void 0) {
+                return new Date(0);
+            }
+            if (isDate(date)) {
+                return date;
+            } else {
+                return new Date(parseFloat(date.toString()));
+            }
+        }
+
+        function isDate(date) {
+            return (date instanceof Date);
+        }
+
+        function format(date, format) {
+            var d = toDate(date);
+            return format
+                .replace(/Y/gm, d.getFullYear().toString())
+                .replace(/m/gm, ('0' + (d.getMonth() + 1)).substr(-2))
+                .replace(/d/gm, ('0' + (d.getDate())).substr(-2))
+                .replace(/H/gm, ('0' + (d.getHours() + 0)).substr(-2))
+                .replace(/i/gm, ('0' + (d.getMinutes() + 0)).substr(-2))
+                .replace(/s/gm, ('0' + (d.getSeconds() + 0)).substr(-2))
+                .replace(/v/gm, ('0000' + (d.getMilliseconds() % 1000)).substr(-3));
+        }
+        const td = document.querySelectorAll('.renderTD');
+        td.forEach(async el => {
+            el.textContent = format(el.textContent, 'd-m-Y H:i:s')
+        })
+
+        async function resetLog() {
+            const res = await axios.post('/admin/resetlog', {}, { withCredentials: true }).catch(() => {});
+            if (res) {
+                alert('Log berhasil di reset!')
+            }
+            else {
+                alert('Terjadi kesalahan! coba refresh halaman ini')
+            }
+        }
+    </script>
+
+</html>

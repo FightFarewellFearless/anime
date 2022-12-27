@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1411830178855665"
+     crossorigin="anonymous"></script>
+    <link rel="preload" href="https://www.w3schools.com/w3css/4/w3.css" as="style">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/main.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Nonton Anime sub Indo gratis tanpa iklan">
+    <meta name="keywords" content="Anime, Sub Indo, Gratis, Tanpa Iklan">
+    <meta name="author" content="Pirles">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch free anime</title>
+
+</head>
+<%- include(process.cwd() + '/assets/dropdown.ejs') %> 
+<body>
+
+    <h1>Nonton anime gratis tanpa iklan</h1>
+    <h2>Anime terbaru:</h2>
+    <h6>(scroll ke kanan untuk melihat lebih banyak)</h6>
+    <div id="list">
+        <% latestAnime.forEach((data)=> { %>
+            <a class="w3-display-container w3-animate-top" href="/watch?r=<%= Buffer.from(data.streamingLink).toString('base64') %>">
+                <img class="w3-image w3-border w3-border-red" src="<%= data.thumbnailUrl %>"
+                    style="width:150px;height:223px;" loading="lazy" alt="Gambar sampul anime">
+                <span class="w3-display-bottomleft w3-orange w3-tiny" style="white-space:normal;font-weight: bolder;">
+                    <b>
+                        <%= data.title %> <%= data.episode %> 
+                    </b>
+                </span>
+            </a>
+            <% }) %>
+    </div>
+</body>
+
+</html>

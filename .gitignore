@@ -1,0 +1,10 @@
+node_modules
+.env
+database
+test.js
+rlimit.js
+dosTest.js
+english.js
+build.js
+obfuscated
+scraping data

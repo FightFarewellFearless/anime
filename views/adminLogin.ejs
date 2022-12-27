@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+</head>
+<style>
+    body {
+        background-color: rgb(26, 26, 26);
+        color: rgb(218, 218, 218);
+    }
+
+    /* #list {
+            overflow: auto;
+            white-space: nowrap;
+        } */
+    /* #list div {
+            display: inline-block;
+        } */
+</style>
+<%- include(process.cwd() + '/assets/dropdown.ejs' ) %>
+
+    <body>
+        <% if (error) { %>
+            <p id="error" class="w3-red w3-large">Your password or captcha is wrong!</p>
+            <% } %>
+                <h1 class="w3-center">Admin Login <i class="fa fa-user-circle"></i></h1>
+                <div class="w3-center">
+                    <form method="post" action="/admin/login">
+                        <label for="psw">Your admin password:<br /></label>
+                        <input id="pw" class="w3-input w3-gray" style="width: 50%;display: inline-block;"
+                            type="password" name="psw" required>
+                        <br />
+                        <br />
+                        <input type="hidden" name="captchaID" value="<%= captchaID %>">
+                        <label for="psw">Enter this captcha to make sure you are not a robot <span class="w3-tiny">(2 minutes before expired)</span>:<br />
+                            <img src="data:image/png;base64,<%= captcha %>" alt="captcha image" />
+                        </label><br />
+                        <input class="w3-input w3-gray" style="width: 50%;display: inline-block;" type="text"
+                            name="captcha" required>
+                        <br />
+                        <button class="w3-button w3-light-green">Login</button>
+                    </form>
+                </div>
+    </body>
+    <!-- <script>
+    async function login() {
+        const pw = document.getElementById('pw').value;
+        const res = await axios.post('/admin/login', {
+            psw: pw
+        }).catch(() => {})
+        if (res?.data === "Unauthorized" || res === undefined) {
+            document.getElementById('error').innerHTML = 'Your password is wrong';
+            return;
+        }
+        window.location.reload();
+    }
+</script> -->
+
+</html>

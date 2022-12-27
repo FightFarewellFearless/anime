@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream free anime</title>
+</head>
+
+<style>
+    body {
+        background-color: rgb(26, 26, 26);
+        color: rgb(218, 218, 218);
+    }
+
+    #player {
+        width: 83%;
+        height: 67vh;
+    }
+    /* #list {
+            overflow: auto;
+            white-space: nowrap;
+        } */
+    /* #list div {
+            display: inline-block;
+        } */
+</style>
+<%- include(process.cwd() + '/assets/dropdown.ejs') %>
+<body>
+    <iframe id="player" class="w3-center" sandbox="allow-scripts" frameBorder="0" widht="" height="" allowfullscreen></iframe>
+    <br>
+    <h3>Pilih Episode:</h3>
+    <% Object.keys(data).forEach(z => { %>  
+        <% const Eps = data[z]; %> 
+        <a href="#player"><button class="w3-button w3-red w3-margin-bottom" onclick="streamThis('<%- Eps.rawStreamingLink %>');this.className += ' w3-black'"><%= z %></button></a>
+    <% }) %> 
+    
+</body>
+
+<script>
+    async function streamThis(rawLink) {
+        const {data} = await axios.post('/getStreamLink', {rawLink});
+        document.getElementById('player').src = data;
+    }
+</script>
+
+</html>
