@@ -44,6 +44,10 @@ Untuk membuat key jalankan perintah berikut:
 ```bash
 ./node_modules/.bin/web-push generate-vapid-keys
 ```  
+Atau jika kamu mengalami kendala, sebagai alternatif lakukan ini:  
+```bash
+npm run generateKeys
+```
 simpan key tersebut untuk nanti kita akan taruh di dalam environment.  
 
 ### Environment

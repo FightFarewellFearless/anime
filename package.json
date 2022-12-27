@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "generateKeys": "web-push generate-vapid-keys"  
+  },
   "dependencies": {
     "axios": "^1.1.2",
     "body-parser": "^1.20.1",
